@@ -22,7 +22,7 @@ public class TweetProducerService {
     public void sendTweet(Tweet tweet) {
         log.info("Sending tweet: {}", tweet);
         CompletableFuture<SendResult<String, Tweet>> future =
-                kafkaTemplate.send("tweet-stream", tweet.getId(), tweet);
+                kafkaTemplate.send("tweets", tweet.getId(), tweet);
 
         future.whenComplete((result, ex) -> {
             if (ex != null) {
