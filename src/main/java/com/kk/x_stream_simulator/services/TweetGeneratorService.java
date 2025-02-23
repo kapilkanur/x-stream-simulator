@@ -16,12 +16,6 @@ public class TweetGeneratorService {
 
     private final TweetProducerService tweetProducerService;
     private final Faker faker = new Faker();
-    private final List<String> categories = List.of(
-            faker.programmingLanguage().name(),
-            faker.hacker().noun(),
-            faker.industrySegments().industry()
-    );
-
 
     public TweetGeneratorService(TweetProducerService tweetProducerService) {
         this.tweetProducerService = tweetProducerService;
@@ -29,6 +23,11 @@ public class TweetGeneratorService {
 
     @Scheduled(fixedRate = 5000)
     public void generateRandomTweet() {
+        final List<String> categories = List.of(
+                faker.programmingLanguage().name(),
+                faker.hacker().noun(),
+                faker.industrySegments().industry()
+        );
         Tweet tweet = new Tweet(
                 UUID.randomUUID().toString(),
                 faker.name().name(),
